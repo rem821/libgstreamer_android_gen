@@ -45,8 +45,6 @@ do
   sed -i -e 's?Libs.private.*?Libs.private: -lgstreamer_android?g' pkgconfig/*
   rm -rf pkgconfig/*pc-e*
   cd ..
-  ZIP="gstreamer-${LIB}-${VERSION}-${DATE}"
-  zip -v out/$ZIP.zip $GST_LIB/* -r
   zip -v out/$GST_LIB.zip $GST_LIB/* -r
   rm -rf $GST_LIB
 done
