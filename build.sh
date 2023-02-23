@@ -14,7 +14,7 @@ DATE=`date "+%Y%m%d-%H%M%S"`
 rm -rf out
 mkdir out
 
-for TARGET in armv7 x86 arm arm64
+for TARGET in armv7 arm64 x86 x86_64
 do
   NDK_APPLICATION_MK="jni/${TARGET}.mk"
   echo "\n\n=== Building GStreamer ${VERSION} for target ${TARGET} with ${NDK_APPLICATION_MK} ==="
@@ -23,18 +23,19 @@ do
 
   if [ $TARGET = "armv7" ]; then
     LIB="armeabi-v7a"
-  elif [ $TARGET = "arm" ]; then
-    LIB="armeabi"
   elif [ $TARGET = "arm64" ]; then
-    LIB="arm64-v8a"
+      LIB="arm64-v8a"
+  elif [ $TARGET = "x86_64" ]; then
+    LIB="x86_64"
   else
     LIB="x86"
   fi;
 
   GST_LIB="gst-build-${LIB}"
 
+  mkdir ${GST_LIB}
   cp -r libs/${LIB}/libgstreamer_android.so ${GST_LIB}
-  cp -r $GSTREAMER_ROOT_ANDROID/${TARGET}/lib/pkgconfig ${GST_LIB}
+  cp -r $GSTREAMER_ROOT_ANDROID/${LIB}/lib/pkgconfig ${GST_LIB}
 
   echo 'Processing '$GST_LIB
   cd $GST_LIB
