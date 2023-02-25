@@ -39,13 +39,11 @@ do
   sed -i -e 's?Libs.private.*?Libs.private: -lgstreamer_android?g' pkgconfig/*
   rm -rf pkgconfig/*pc-e*
   cd ..
-  zip -v out/$GST_LIB.zip $GST_LIB/* -r
+  mkdir -p out/Gstreamer/$LIB/lib/
+  cp -r $GST_LIB/libgstreamer_android.so  out/Gstreamer/$LIB/lib/
   rm -rf $GST_LIB
 done
 
-rm -rf libs obj
-
-zip -v out/src.zip src -r
-rm -rf src
+rm -rf libs obj src
 
 echo "\n*** Done ***\n`ls out`"
