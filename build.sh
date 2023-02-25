@@ -39,7 +39,7 @@ do
   sed -i -e 's?Libs.private.*?Libs.private: -lgstreamer_android?g' pkgconfig/*
   rm -rf pkgconfig/*pc-e*
   cd ..
-  mkdir -p out/Gstreamer/$LIB/lib/
+  mkdir -p out/Gstreamer-$VERSION/$LIB/lib/
   cp -r $GST_LIB/libgstreamer_android.so  out/Gstreamer/$LIB/lib/
   rm -rf $GST_LIB
 done
