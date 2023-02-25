@@ -1,14 +1,9 @@
-if [ "$#" -ne 1 ]; then
-  echo "Usage: $0 GSTREAMER_VERSION" >&2
-  exit 1
-fi
-
 if [[ -z "${GSTREAMER_ROOT_ANDROID}" ]]; then
   echo "You must define an environment variable called GSTREAMER_ROOT_ANDROID and point it to the folder where you extracted the GStreamer binaries"
   exit 1
 fi
 
-VERSION=$1
+VERSION=1.18.6
 DATE=`date "+%Y%m%d-%H%M%S"`
 
 rm -rf out
@@ -33,7 +28,6 @@ do
 
   GST_LIB="gst-build-${LIB}"
 
-  mkdir ${GST_LIB}
   cp -r libs/${LIB}/libgstreamer_android.so ${GST_LIB}
   cp -r $GSTREAMER_ROOT_ANDROID/${LIB}/lib/pkgconfig ${GST_LIB}
 

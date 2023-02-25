@@ -1,6 +1,9 @@
+gst-build-arm64_v8a/
 gst-build-armeabi-v7a/
 gst-build-x86/
+gst-build-x86_64/
 libs/
 obj/
 src/
 out/
+./idea
