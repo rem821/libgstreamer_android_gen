@@ -1,18 +1,18 @@
 if [[ -z "${GSTREAMER_ROOT_ANDROID}" ]]; then
-  echo "You must define an environment variable called GSTREAMER_ROOT_ANDROID and point it to the folder where you extracted the GStreamer binaries"
+  printf "You must define an environment variable called GSTREAMER_ROOT_ANDROID and point it to the folder where you extracted the GStreamer binaries"
   exit 1
 fi
 
-VERSION=1.18.6
+VERSION=1.22.12
 DATE=`date "+%Y%m%d-%H%M%S"`
 
 rm -rf out
 mkdir out
 
-for TARGET in armv7 arm64 x86 x86_64
+for TARGET in arm64
 do
   NDK_APPLICATION_MK="jni/${TARGET}.mk"
-  echo "\n\n=== Building GStreamer ${VERSION} for target ${TARGET} with ${NDK_APPLICATION_MK} ==="
+  printf "\n\n=== Building GStreamer ${VERSION} for target ${TARGET} with ${NDK_APPLICATION_MK} ==="
 
   ndk-build NDK_APPLICATION_MK=$NDK_APPLICATION_MK
 
@@ -27,8 +27,13 @@ do
   fi;
 
   GST_LIB="gst-build-${LIB}"
+  rm -rf $GST_LIB
 
-  cp -r libs/${LIB}/libgstreamer_android.so ${GST_LIB}
+  exit
+
+  mkdir -p ${GST_LIB}
+  printf "still alive"
+  cp -r libs/${LIB}/libgstreamer_android.a ${GST_LIB}
   cp -r $GSTREAMER_ROOT_ANDROID/${LIB}/lib/pkgconfig ${GST_LIB}
 
   echo 'Processing '$GST_LIB
@@ -40,10 +45,10 @@ do
   rm -rf pkgconfig/*pc-e*
   cd ..
   mkdir -p out/Gstreamer-$VERSION/$LIB/lib/
-  cp -r $GST_LIB/libgstreamer_android.so  out/Gstreamer/$LIB/lib/
+  cp -r $GST_LIB/libgstreamer_android.a  out/Gstreamer-$VERSION/$LIB/lib/
   rm -rf $GST_LIB
 done
 
 rm -rf libs obj src
 
-echo "\n*** Done ***\n`ls out`"
+printf "\n*** Done ***\n`ls out`"
