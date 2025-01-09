@@ -1,3 +1,3 @@
-== GStreamer streaming side driver for the BUT Telepresence remote robot controlling.
+== Package for cross compiling a shared library of a GStreamer framework for Arm64-v8a (Android)
 
 === This package is a part of my thesis, so it is a part of an active research. Due to this, it lacks documentation and it isn't versioned.
